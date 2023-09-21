@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//__custom authentication using fortify package__//
+Route::get('/home',function(){
+    return view('home');
+})->name('home')->middleware('auth');
+
+//__logout__//
+Route::get('/logout',function(){
+    Auth::logout();
+    return redirect()->route('login');
+})->name('logout');
